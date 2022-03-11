@@ -1,5 +1,6 @@
 //requiring express 
 const express = require('express');
+const res = require('express/lib/response');
 
 //bodyParser
 const bodyParser = require('body-parser');
@@ -17,8 +18,9 @@ app.use(bodyParser.urlencoded({extended:true}));
 //dummy data
 let calculation = [
     {
-        numOne
-        numTwo
+        numOne: 1,
+        symbol: 'Add',
+        numTwo: 1,
     }
 ];
 
@@ -32,10 +34,6 @@ app.post('/calculator', (req,res) =>{
     calculation.push(req.body);
     res.sendStatus(201);
 })
-
-
-
-
 
 
 //listen
