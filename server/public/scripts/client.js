@@ -1,5 +1,18 @@
 $(document).ready(handleReady);
 
-function onReady(){
+function handleReady(){
     console.log('hi')
+    getCalculation();
+};
+
+getCalculation(){
+    $.ajax({
+        url: '/calculation',
+        method: 'GET'
+    })
+
+
+
+
 }
+
