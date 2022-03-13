@@ -15,26 +15,49 @@ app.use(express.static('server/public'));
 //use bodyParser config!
 app.use(bodyParser.urlencoded({extended:true}));
 
-//dummy data
-let calculation = [
-    {
-        numOne: 1,
-        symbol: 'Add',
-        numTwo: 1,
-    }
-];
+//store in array 
+let calculation = [];
 
+//get route 
 app.get('/calculator', (req, res) => {
     console.log('GET /calculator');
     res.send(calculation)
 })
 
+//post route 
 app.post('/calculator', (req,res) =>{
-    console.log('POST quotes', req.body);
-    calculation.push(req.body);
-    res.sendStatus(201);
-})
+    let firstNumber = req.body.firstNumber;
+    let secondNumber = req.body.secondNumber;
+    let operator = req.body.operator;
+    let result = 0;
 
+    switch (operator){
+        case '+':
+            result = Number(firstNumber) + Number(secondNumber);
+            break;
+        case '-':
+            result = Number(firstNumber) - Number(secondNumber);
+            break;
+        case '*':
+            result = Number(firstNumber) * Number(secondNumber);
+            break;
+        case '/':
+            result = Number(firstNumber) / Number(secondNumber);
+            break;
+    }
+    let calculationObject = {
+        firstNumber: firstNumber,
+        secondNumber: secondNumber,
+        operator: operator,
+        result: result,
+    }
+
+    calculation.push(calculationObject)
+    res.send(calculationObject)
+    // console.log('POST quotes', req.body);
+    // calculation.push(req.body);
+    // res.sendStatus(201);
+})
 
 //listen
 app.listen(PORT, function(){

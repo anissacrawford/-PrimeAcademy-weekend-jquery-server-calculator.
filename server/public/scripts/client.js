@@ -1,21 +1,17 @@
 $(document).ready(handleReady);
 
+//global variable for operator 
+let operator = ''
+
+//handleReady function 
 function handleReady(){
     // console.log('hi')
     getCalculation();
-    $('#addBtn').on('click', handleAdd);
-    $('#minusBtn').on('click', handleSubtract);
-    $('#multiplyBtn').on('click', handleMultiply);
-    $('#divideBtn').on('click', handleDivide);
+   
     $('#equalBtn').on('click', handleEqual);
     $('#clearBtn').on('click', handleClear)
 };
 
-let calculation = {
-    numberOne: $('numberOne').val(),
-    numberTwo: $('numberTwo').val(),
-    symbol: ''
-}
 
 function getCalculation (){
 
@@ -31,51 +27,41 @@ function getCalculation (){
     })
 }
 
-//sum global variable
-let sum = 0
+function calculate(){
+    let firstNumber = $('#firstNumber').val();
+    let secondNumber = $('#secondNumber').val();
+    let calculationObject = {
+        firstNumber: firstNumber,
+        secondNumber: secondNumber,
+        operator: operator,
+    }
 
-//function for addition
-function handleAdd(){
-    sum = calculation.numberOne + calculation.numberTwo;
-    console.log('handleAdd');
-}
-
-//function for subtraction
-function handleSubtract(){
-    sum = calculation.numberOne - calculation.numberTwo;
-    console.log('handleSubtract');
-}
-
-//function for multiplication 
-function handleMultiply(){
-    sum = calculation.numberOne * calculation.numberTwo;
-    console.log('handleMultiply');
-}
-
-
-//function for division 
-function handleDivide(){
-    sum = calculation.numberOne / calculation.numberTwo;
-    console.log('handleDivide');
-
+    $.ajax({
+        url: '/calculator',
+        method: 'POST',
+        data: calculationObject,
+    }).then(function(response){
+        let result = response.result
+        $('#result').append(`${result}`) //can you do this?
+        getCalculation();
+    })
 }
 
 //function for equal
 function handleEqual(){
     console.log('clicked!');
-    return sum;
 }
 
 function handleClear(){
-    $('numberOne').val('');
-    $('numberTwo').val('');
+    $('firstNumber').val('');
+    $('secondNumber').val('');
 }
 
 //handles DOM 
 function render(calculation){
     for (const answers of calculation){
-        $('body').append(`<h3>
-        ${answers.numOne} ${answers.symbol} ${answers.numTwo}
+        $('#results').append(`<h3>
+        ${answers.firstNumber} ${answers.operator} ${answers.secondNumber}
         </h3>`)
     }
 }

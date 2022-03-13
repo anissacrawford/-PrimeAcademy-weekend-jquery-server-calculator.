@@ -7,17 +7,25 @@
     <script src="vendors/jquery.js"></script>
     <script src="scripts/client.js"></script>
     <link rel="stylesheet" href="styles/style.css">
-    <title>Document</title>
+    <title>Server Side Calculator</title>
 </head>
 <body>
     <h1>Server Side Calculator</h1>
-    <input id="numberOne" type="number" placeholder="Number 1">
+
+    <input id="firstNumber" type="number" placeholder="Number 1">
+
     <button id="addBtn">+</button>
     <button id="minusBtn">-</button>
     <button id="multiplyBtn">*</button>
     <button id="divideBtn">/</button>
-    <input id="numberTwo" type="number" placeholder="Number 2">
+
+    <input id="secondNumber" type="number" placeholder="Number 2">
+
     <button id="equalBtn">=</button>
     <button id="clearBtn">CLEAR</button>
+
+    <div>
+        <ul id="history">History:</ul>
+    </div>
 </body>
 </html>
