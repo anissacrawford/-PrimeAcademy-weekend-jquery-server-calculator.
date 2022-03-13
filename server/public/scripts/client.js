@@ -1,3 +1,5 @@
+// const res = require("express/lib/response");
+
 $(document).ready(handleReady);
 
 //global variable for operator 
@@ -8,6 +10,7 @@ function handleReady(){
     // console.log('hi')
     getCalculation();
    
+    
     $('#equalBtn').on('click', handleEqual);
     $('#clearBtn').on('click', handleClear)
 };
@@ -40,9 +43,13 @@ function calculate(){
         url: '/calculator',
         method: 'POST',
         data: calculationObject,
-    }).then(function(response){
-        let result = response.result
-        $('#result').append(`${result}`) //can you do this?
+    }).then(function(res){
+        // let result = response.result
+        // $('#result').append(`${result}`) 
+        
+        //send response 
+        let result = response.result;
+        $('#result').append(`${result}`)
         getCalculation();
     })
 }
@@ -52,16 +59,19 @@ function handleEqual(){
     console.log('clicked!');
 }
 
+//handle clear button 
 function handleClear(){
-    $('firstNumber').val('');
-    $('secondNumber').val('');
+    $('#firstNumber').val('');
+    $('#secondNumber').val('');
+
+    $('#result').empty();
 }
 
 //handles DOM 
 function render(calculation){
     for (const answers of calculation){
-        $('#results').append(`<h3>
-        ${answers.firstNumber} ${answers.operator} ${answers.secondNumber}
+        $('#history').append(`<h3>
+        ${answers.firstNumber} ${answers.operator} ${answers.secondNumber} = ${answers.results}
         </h3>`)
     }
 }

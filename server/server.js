@@ -16,7 +16,13 @@ app.use(express.static('server/public'));
 app.use(bodyParser.urlencoded({extended:true}));
 
 //store in array 
-let calculation = [];
+let calculation = [
+    {
+        firstNumber: 1,
+        operator: '+',
+        secondNumber: 2
+    }
+];
 
 //get route 
 app.get('/calculator', (req, res) => {
@@ -52,8 +58,8 @@ app.post('/calculator', (req,res) =>{
         result: result,
     }
 
-    calculation.push(calculationObject)
-    res.send(calculationObject)
+    calculation.push(calculationObject);
+    res.send(calculationObject);
     // console.log('POST quotes', req.body);
     // calculation.push(req.body);
     // res.sendStatus(201);
