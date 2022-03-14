@@ -1,0 +1,18 @@
+* {
+    background-color: lavender;
+    font-family: sans-serif;
+}
+
+.operatorBtn {
+    background-color: white;
+}
+
+#equalBtn{
+    background-color: white;
+}
+
+#clearBtn{
+    background-color: white;
+}
+
+
