@@ -10,8 +10,13 @@ function handleReady(){
     // console.log('hi')
     getCalculation();
    
-    
-    $('#equalBtn').on('click', handleEqual);
+    //should get value of operator 
+    $(".operatorBtn").on('click', function(){
+        operator = $(this).html();
+    })
+
+    //click events
+    $('#equalBtn').on('click', calculate);
     $('#clearBtn').on('click', handleClear)
 };
 
@@ -54,11 +59,6 @@ function calculate(){
     })
 }
 
-//function for equal
-function handleEqual(){
-    console.log('clicked!');
-}
-
 //handle clear button 
 function handleClear(){
     $('#firstNumber').val('');
@@ -71,7 +71,7 @@ function handleClear(){
 function render(calculation){
     for (const answers of calculation){
         $('#history').append(`<h3>
-        ${answers.firstNumber} ${answers.operator} ${answers.secondNumber} = ${answers.results}
+        ${answers.firstNumber} ${answers.operator} ${answers.secondNumber} = ${answers.result}
         </h3>`)
     }
 }

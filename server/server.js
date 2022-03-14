@@ -17,11 +17,12 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 //store in array 
 let calculation = [
-    {
-        firstNumber: 1,
-        operator: '+',
-        secondNumber: 2
-    }
+    //dummy data
+    //{
+        // firstNumber: 1,
+        // operator: '+',
+        // secondNumber: 2
+    //}
 ];
 
 //get route 
@@ -60,9 +61,7 @@ app.post('/calculator', (req,res) =>{
 
     calculation.push(calculationObject);
     res.send(calculationObject);
-    // console.log('POST quotes', req.body);
-    // calculation.push(req.body);
-    // res.sendStatus(201);
+
 })
 
 //listen
