@@ -35,6 +35,7 @@ function getCalculation (){
     })
 }
 
+
 function calculate(){
     let firstNumber = $('#firstNumber').val();
     let secondNumber = $('#secondNumber').val();
@@ -49,26 +50,19 @@ function calculate(){
         method: 'POST',
         data: calculationObject,
     }).then(function(res){
-        // let result = response.result
-        // $('#result').append(`${result}`) 
-        
-        //send response 
-        let result = response.result;
-        $('#result').append(`${result}`)
         getCalculation();
     })
 }
 
-//handle clear button 
+//handles clear button 
 function handleClear(){
     $('#firstNumber').val('');
     $('#secondNumber').val('');
-
-    $('#result').empty();
 }
 
 //handles DOM 
 function render(calculation){
+    $('#history').empty()
     for (const answers of calculation){
         $('#history').append(`<h3>
         ${answers.firstNumber} ${answers.operator} ${answers.secondNumber} = ${answers.result}
